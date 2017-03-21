@@ -1,0 +1,98 @@
+/* Empty. Add your own CSS if you like */
+.mongo{
+    writing-mode:  tb-lr;               /* ie8,ie9 */
+    -ms-writing-mode: tb-lr;       /* ie8,ie9 */
+    writing-mode:vertical-lr;       /* 火狐，谷歌 */
+    -webkit-writing-mode:vertical-lr;        /* 谷歌，360 */
+    -moz-writing-mode: vertical-lr;
+    -o-writing-mode: vertical-lr;
+    text-orientation: sideways-right;
+    -webkit-text-orientation: sideways-right;
+    vertical-align:text-top;
+    white-space: pre-wrap;
+    font-family:LD-MONG-BT;
+}
+.chinese{
+    writing-mode:  tb-lr;               /* ie8,ie9 */
+    -ms-writing-mode: tb-lr;       /* ie8,ie9 */
+    writing-mode:vertical-lr;       /* 火狐，谷歌 */
+    -webkit-writing-mode:vertical-lr;        /* 谷歌，360 */
+    -moz-writing-mode: vertical-lr;
+    -o-writing-mode: vertical-lr;
+    white-space:pre-wrap;
+
+}
+.spin {
+    writing-mode: tb-lr; /* ie8,ie9 */
+    -ms-writing-mode: tb-lr; /* ie8,ie9 */
+    writing-mode: vertical-lr; /* 火狐，谷歌 */
+    -webkit-writing-mode: vertical-lr; /* 谷歌，360 */
+    -moz-writing-mode: vertical-lr;
+    -o-writing-mode: vertical-lr;
+}
+.num{
+    writing-mode:  lr-tb;               /* ie8,ie9 */
+    -ms-writing-mode: lr-tb;       /* ie8,ie9 */
+    writing-mode:vertical-tb;       /* 火狐，谷歌 */
+    -webkit-writing-mode:vertical-tb;        /* 谷歌，360 */
+    -moz-writing-mode: vertical-tb;
+    -o-writing-mode: vertical-tb;
+}
+.svg {
+    width: 19% !important;
+    height: 85px !important;
+}
+
+.wm3{
+    display: block;
+    -moz-writing-mode: vertical-lr;
+    writing-mode: vertical-lr;
+    -webkit-writing-mode: vertical-lr;
+    -o-writing-mode: vertical-lr;
+    -ms-writing-mode: tb-lr;
+    writing-mode: tb-lr;
+    font-family: "LDMONG16100802BT","Times New Roman", Times, serif;
+}
+
+.wm{
+    text-orientation: sideways-right;
+    -webkit-text-orientation: sideways-right;
+}
+
+.logo img{ width:50%;height:50%;}
+.inputVertical {
+    -webkit-writing-mode: vertical-rl;
+    -moz-writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    writing-mode: vertical-rl;
+    user-modify: read-write-plaintext-only;
+    -moz-user-modify: read-write-plaintext-only;
+    -webkit-user-modify: read-write-plaintext-only;
+    width: 50px;
+    font-size: 22px;
+    outline: none;
+    height:70%;
+    padding: 8px;
+    white-space: nowrap;
+    float: left;
+    margin-left: 0.1em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-rtl-ordering: logical;
+    -webkit-user-select: text;
+}
+
+@font-face {
+    font-family:LD-MONG-BT;
+    src:url('../font/LD-MONG-BT.ttf');
+
+}
+
+

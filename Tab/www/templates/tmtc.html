@@ -1,0 +1,84 @@
+<ion-view >
+    <ion-content ng-controller="TmtcCtrl">
+        <div class="card" >
+            <div class="item item-divider " ng-controller="ClickCtrl">
+                <button  class="button button-icon icon-right ion-android-arrow-dropdown "style="margin-right:90px;"
+                         ng-click="openPopover($event)"   >传统蒙古文->汉文</button>
+                <button class="button button-icon icon-right ion-android-send" ng-click="submit()">翻译</button>
+                <script id="choice.html" type="text/ng-template">
+                    <ion-popover-view >
+                        <ion-content >
+                            <ion-list>
+                                <ion-item  href="#/app/home" ng-click="closePopover()">
+                                    语言选择
+                                </ion-item>
+                                <ion-item  href="#/app/cttm" ng-click="closePopover()">
+                                    汉文->传统蒙古文
+                                </ion-item>
+                                <ion-item  href="#/app/tmtc" ng-click="closePopover()">
+                                    传统蒙古文->汉文
+                                </ion-item>
+                                <ion-item  href="#/app/ctwm" ng-click="closePopover()">
+                                    汉文->西里尔蒙古文
+                                </ion-item>
+
+                                <ion-item  href="#/app/wmtc" ng-click="closePopover()">
+                                    西里尔蒙古文->汉文
+                                </ion-item>
+                            </ion-list>
+                        </ion-content>
+                    </ion-popover-view>
+                </script>
+            </div>
+
+
+               <!-- <div  class="inputVertical"  contenteditable="true" spellcheck="false">
+
+                </div>-->
+            <div class="m" id="inputVertical" ng-keydown="checkEnter(event)" style=" height:200px; overflow:auto" contenteditable="true" spellcheck="false">
+            </div>
+        </div>
+        <ion-scroll direction="x" ng-show="mswitch" scrollbar-x="false"> 
+            <table class="spin">
+                <tr ng-show="mshow">
+                    <td  align="center" colspan="2" style="background: #1f8dd6; color: #ffffff;">
+                        翻&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp译
+                    </td>
+                </tr>
+                <tr ng-repeat="result in results" style="border:1px solid #000000;width:50px;border-top-style:none;border-bottom-style:none">
+                    <td>
+                        <span class="num">{{$index+1}}</span>
+                    </td>
+                    <td style="height:80px">
+                    <span class="mongo"> {{result.mongolRevise}}</span>
+                </td>
+                    <td style="height:110px">
+                        <span class="chinese" >{{result.chinese}}</span>
+                    </td>
+
+                </tr>
+                <tr style="width:30px"></tr>
+                <tr >
+                    <td class="chinese" align="center" colspan="2" style="background: #1f8dd6; color: #ffffff;">相&nbsp关&nbsp词&nbsp条</td>
+                </tr>
+                <tr ng-repeat="about in abouts" style="border:1px solid #000000;width:50px;border-top-style: none;border-bottom-style:none">
+                    <td>
+                        <span class="num">{{$index+1}}</span>
+                    </td>
+                    <td style="height:80px">
+                    <span class="mongo"> {{about.mongolRevise}}</span>
+                </td>
+                    <td style="height:110px">
+                        <span class="chinese" >{{about.chinese}}</span>
+                    </td>
+
+                </tr>
+            </table>
+        </ion-scroll>
+
+
+
+
+    </ion-content>
+
+</ion-view>

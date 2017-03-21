@@ -1,0 +1,46 @@
+<ion-view >
+    <ion-content>
+        <div class="card">
+            <div class="item item-divider  " ng-controller="ClickCtrl">
+                <button  class="button button-icon icon-right ion-android-arrow-dropdown "
+                ng-click="openPopover($event)"   >语言选择</button>
+
+                <script id="choice.html" type="text/ng-template">
+                <ion-popover-view >
+                    <ion-content >
+                        <ion-list>
+                            <ion-item  href="#/app/home" ng-click="closePopover()">
+                                语言选择
+                            </ion-item>
+                            <ion-item  href="#/app/cttm" ng-click="closePopover()">
+                                汉文->传统蒙古文
+                            </ion-item>
+                            <ion-item  href="#/app/tmtc" ng-click="closePopover()">
+                                传统蒙古文->汉文
+                            </ion-item>
+                            <ion-item  href="#/app/ctwm" ng-click="closePopover()">
+                                汉文->西里尔蒙古文
+                            </ion-item>
+
+                            <ion-item  href="#/app/wmtc" ng-click="closePopover()">
+                                西里尔蒙古文->汉文
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </ion-popover-view>
+                        </script>
+                    </div>
+
+         <div class="logo" style="text-align: center; vertical-align: middle; line-height:200px" >
+             <img src="image/logo2.png">
+
+           <!-- <div style="display:block;float:left;">
+             <textarea   placeholder="输入要翻译的文本..."  style=' resize:none;width:930%;color: #FFFFFF;background-color:lightseagreen;
+           overflow:hidden;' rows="21"></textarea>
+            </div>-->
+         </div>
+
+      </div>
+        </ion-content>.;
+
+</ion-view>

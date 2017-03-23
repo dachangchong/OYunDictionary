@@ -38,8 +38,8 @@
     -moz-writing-mode: vertical-tb;
     -o-writing-mode: vertical-tb;
 }
-.svg {
-    width: 19% !important;
+.spinner svg {
+    width: 100% !important;
     height: 85px !important;
 }
 
@@ -87,6 +87,7 @@
     -webkit-box-sizing: border-box;
     -webkit-rtl-ordering: logical;
     -webkit-user-select: text;
+    font-family:LD-MONG-BT;
 }
 
 @font-face {

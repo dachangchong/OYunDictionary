@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova'])
 
 /*.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -40,6 +40,21 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })*/
+.controller('DeviceCtrl',['$scope','$cordovaDevice', function($scope, $cordovaDevice) {
+
+    document.addEventListener("deviceready", function () {
+
+        $scope.device = $cordovaDevice.getDevice();
+        //$scope.cordova = $cordovaDevice.getCordova();
+        $scope.manufacturer=$cordovaDevice.getManufacturer();
+        $scope.model = $cordovaDevice.getModel();
+        $scope.platform = $cordovaDevice.getPlatform();
+        $scope.uuid = $cordovaDevice.getUUID();
+        $scope.version = $cordovaDevice.getVersion();
+
+    }, false);
+}])
+
  .controller( 'ClickCtrl',['$scope','$ionicPopover','$timeout',function($scope,$ionicPopover,$timeout){
         $scope.popover = $ionicPopover.fromTemplateUrl('choice.html', {
             scope: $scope
@@ -78,10 +93,11 @@ angular.module('starter.controllers', [])
     $scope.resultsSize = 0;
     $scope.aboutsSize = 0;
     $scope.results2 = [];
-    $scope.hswitch = false;
-    $scope.hshow=false;
-    $scope.hload=false;
+    $scope.hshow=false;//“翻译”显示
+    $scope.hshow1=false;//“相关词条”显示
+    $scope.hload=false;//加载动画显示
     $scope.submit = function(){
+        $scope.hswitch = false;//结果显示
         if($scope.inputText==""){
             alert("请输入关键词进行查询");
             return;
@@ -114,13 +130,18 @@ angular.module('starter.controllers', [])
                     });
                 }
                //console.log( $scope.abouts);
+                $scope.hload=false;
                 $scope.hswitch = true;
-                if($scope.results!=null){
+                if($scope.resultsSize!=0){
                     $scope.hshow=true;
                 }else {
                     $scope.hshow=false;
                 }
-                $scope.hload=false;
+                if($scope.aboutsSize!=0){
+                    $scope.hshow1=true;
+                }else {
+                    $scope.hshow1=false;
+                }
             })
             .error(function () {
                 alert("查询失败");
@@ -136,60 +157,85 @@ angular.module('starter.controllers', [])
         $scope.resultsSize = 0;
         $scope.aboutsSize = 0;
         $scope.results2 = [];
-        $scope.hchange=false;
-        $scope.cshow=false;
+       // $scope.hchange=false;//结果显示
+        $scope.cshow=false;//“翻译”显示
+        $scope.cshow1=false;//“相关词条”显示
+        $scope.cload=false;//加载动画显示
         $scope.submit = function(){
-
-            console.log($scope.inputText);
+            $scope.hchange=false;//结果显示
+           // console.log($scope.inputText);
             if($scope.inputText==""){
                 alert("请输入关键词进行查询");
                 return;
             }
-            $http({
-                method: 'POST',
-                url: 'http://dicsv.mglip.com/DicAndroidSer/Service1.svc/dic/appDictionary',
-                params: {'regular':'汉新' , 'inputStr':$scope.inputText,userName:'lichunhui',passWord:'123456'
-                }
 
-            })
-                .success(function (date) {
+                $scope.cload = true;
+                $http({
+                    method: 'POST',
+                    url: 'http://dicsv.mglip.com/DicAndroidSer/Service1.svc/dic/appDictionary',
+                    params: {'regular': '汉新', 'inputStr': $scope.inputText, userName: 'lichunhui', passWord: '123456'
+                    }
 
-                    $scope.results = [];
-                    $scope.abouts = [];
-                    $scope.resultsSize= 0;
-                    $scope.aboutsSize = 0;
-                    if(date['dictionary']==null){
-                        alert("未查到结果")
-                    }else{
-                        date.dictionary.forEach(function (e) {
-                            if(e.chinese==$scope.inputText||e.chinese==$scope.inputText+' '){
-                                $scope.resultsSize ++;
-                                $scope.results.push(e);
-                            }else {
-                                $scope.aboutsSize ++;
-                                $scope.abouts.push(e);
-                            }
-                        });
-                    }
-                    // console.log( $scope.abouts);
-                    $scope.hchange=true;
-                    if($scope.results!=null){
-                        $scope.cshow=true;
-                    }else{
-                        $scope.cshow=false;
-                    }
                 })
-                .error(function () {
-                    alert("查询失败");
-                    $scope.isLoading = false;
-                });
+                    .success(function (date) {
+
+                        $scope.results = [];
+                        $scope.abouts = [];
+                        $scope.resultsSize = 0;
+                        $scope.aboutsSize = 0;
+                        if (date['dictionary'] == null) {
+
+                            alert("未查到结果")
+
+
+                        } else {
+                            date.dictionary.forEach(function (e) {
+                                if (e.chinese == $scope.inputText || e.chinese == $scope.inputText + ' ') {
+                                    $scope.resultsSize++;
+                                    $scope.results.push(e);
+                                } else {
+                                    $scope.aboutsSize++;
+                                    $scope.abouts.push(e);
+                                }
+                            });
+                            $scope.hchange = true;
+                            if ($scope.resultsSize != 0) {
+                                $scope.cshow = true;
+                            } else {
+                                $scope.cshow = false;
+                            }
+                            if($scope.aboutsSize!=0){
+                                $scope.cshow1=true;
+                            }else{
+                                $scope.cshow1=false;
+                            }
+                            $scope.cload = false;
+                        }
+                        // console.log( $scope.abouts);
+
+                    })
+                    .error(function () {
+                        alert("查询失败");
+                        $scope.isLoading = false;
+                    });
 
         };
 
     }])
 
  .controller('TmtcCtrl', ['$scope','$http',function($scope,$http) {
+        $scope.mshow=false;//“翻译”控制
+        $scope.mshow1=false;//“相关词条”显示
+        $scope.mload=false;//加载动画控制
+        $scope.mswitch=false;//结果控制
+        $scope.inputText = "";
+        $scope.results = [];
+        $scope.abouts = [];
+        $scope.resultsSize = 0;
+        $scope.aboutsSize = 0;
+        $scope.results2 = [];
         $scope.checkEnter = function (e) {
+
             var et=e||window.event;
             var keycode=et.charCode||et.keyCode;
             if(keycode==13)
@@ -201,21 +247,15 @@ angular.module('starter.controllers', [])
                     e.preventDefault();//for firefox
             }
         };
-        $scope.mshow=false;
-        $scope.mswitch=false;
-        $scope.inputText = "";
-        $scope.results = [];
-        $scope.abouts = [];
-        $scope.resultsSize = 0;
-        $scope.aboutsSize = 0;
-        $scope.results2 = [];
         $scope.submit = function(){
+            $scope.mswitch=false;
             var input = document.getElementById('inputVertical');
             $scope.inputText = input.innerText;
             if($scope.inputText==""){
                 alert("请输入关键词进行查询");
                 return;
             }
+            $scope.mload=true;
             $scope.results = [];
             $scope.abouts = [];
             $scope.resultsSize = 0;
@@ -245,10 +285,16 @@ angular.module('starter.controllers', [])
                         });
                     }
                     $scope.mswitch=true;
-                    if($scope.results!=null){
-                       $scope.mshow=true;
+                    $scope.mload=false;
+                    if($scope.resultsSize!=0){
+                        $scope.mshow=true;
                     }else{
                         $scope.mshow=false;
+                    }
+                    if($scope.aboutsSize!=0){
+                        $scope.mshow1=true;
+                    }else{
+                        $scope.mshow1=false;
                     }
 
                 })
@@ -260,17 +306,22 @@ angular.module('starter.controllers', [])
     }])
 
  .controller('WmtcCtrl', ['$scope','$http',function($scope,$http) {
-        $scope.wshow=false;
-        $scope.wchange=false;
+        $scope.wshow=false;//“翻译”显示
+        $scope.wshow1=false;//“相关词条”显示
+        $scope.wchange=false;//结果显示
+        $scope.wload=false;//加载动画显示
         $scope.inputText = "";
         $scope.results = [];
         $scope.aboutss = [];
+        $scope.resultsSize = 0;
+        $scope.aboutssSize = 0;
         $scope.submit = function() {
+            $scope.wchange=false;
             if ($scope.inputText == "") {
                 alert("请输入关键词进行查询");
                 return;
             }
-
+         $scope.wload=true;
             $http({
                 method: 'POST',
                 url: 'http://dicsv.mglip.com/DicAndroidSer/Service1.svc/dic/appDictionary',
@@ -281,23 +332,34 @@ angular.module('starter.controllers', [])
                 .success(function (date) {
                     $scope.results = [];
                     $scope.aboutss = [];
+                    $scope.resultsSize = 0;
+                    $scope.aboutssSize = 0;
                     if (date['dictionary']==null) {
                         alert("未查到结果")
                     } else {
                         date.dictionary.forEach(function (e) {
                             if (e.newMog.trim() == $scope.inputText.trim()) {
+                                $scope.resultsSize ++;
                                 $scope.results.push(e);
                             } else {
+
+                                $scope.aboutssSize ++;
                                 $scope.aboutss.push(e);
                             }
                         });
                     }
                  $scope.wchange=true;
-                    if($scope.results!=null){
+                    if($scope.resultsSize!=0){
                         $scope.wshow=true;
                     }else{
                         $scope.wshow=false;
                     }
+                    if($scope.aboutssSize!=0){
+                        $scope.wshow1=true;
+                    }else{
+                        $scope.wshow1=false;
+                    }
+                    $scope.wload=false;
                 })
                 .error(function () {
                     alert("查询失败");

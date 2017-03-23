@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/wmtc',
     views: {
       'menuContent': {
-        templateUrl: 'templates/wmtc.html',
+        templateUrl: 'templates/wmtc.html'
 
       }
     }
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           url: '/test',
           views: {
               'menuContent': {
-                  templateUrl: 'templates/test.html',
+                  templateUrl: 'templates/test.html'
 
               }
           }

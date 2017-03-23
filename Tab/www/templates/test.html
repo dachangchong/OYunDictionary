@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html ng-app="ionicApp">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+<ion-view >
 
-    <title>菜鸟教程(runoob.com)</title>
-    <link href="http://www.runoob.com/static/ionic/css/ionic.min.css" rel="stylesheet">
-    <script src="http://www.runoob.com/static/ionic/js/ionic.bundle.min.js"></script>
+    <ion-content ng-controller="DeviceCtrl">
+        <table>
+            <tr>
+                <td>
+               手机制造商：{{manufacturer}}
+            </td>
+            </tr>
+            <tr>
+                <td>
+                手机型号：{{model}}
+            </td>
+                </tr>
+            <tr>
+                <td>
+                 手机系统：{{platform}}
+                    </td>
+                </tr>
+            <tr>
+                <td>
+                 系统版本号：{{version}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                 uuid：{{uuid}}
+                    </td>
+                </tr>
 
-</head>
-
-<body >
-<br>
-<br>
-<br>
-<h1>测试页</h1>
-
-</body>
-</html>
+            </table>
+    </ion-content>
+</ion-view>
